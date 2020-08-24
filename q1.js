@@ -17,6 +17,7 @@ exports.q1 = function () {
 
 /**
  * Is number a divisible by number b.
+ *
  * @return {boolean}
  */
 function divisibleBy(a, b) {
