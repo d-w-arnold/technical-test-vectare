@@ -13,5 +13,37 @@
  * @return {number}
  */
 exports.q7 = function () {
-    return 0;
+    let triangle = [
+        [3],
+        [7, 4],
+        [2, 4, 6],
+        [8, 5, 9, 3]
+    ];
+    let largest_total = 0;
+    let exponent = triangle.length - 1;
+    for (let i = 0; i < Math.pow(2, exponent); i++) {
+        let path = i.toString(2);
+        let path_len = path.length;
+        for (let j = 0; j < (exponent - path_len); j++) {
+            path = '0' + path;
+        }
+        let x = 0;
+        let y = 0;
+        let tmp_total = triangle[x][y];
+        for (let j = 0; j < path.length; j++) {
+            let c = path.charAt(j);
+            if (c === '0') {
+                x++;
+                tmp_total += triangle[x][y];
+            } else if (c === '1') {
+                x++;
+                y++;
+                tmp_total += triangle[x][y];
+            }
+        }
+        if (tmp_total > largest_total) {
+            largest_total = tmp_total;
+        }
+    }
+    return largest_total;
 };
