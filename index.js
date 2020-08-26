@@ -17,7 +17,7 @@ http.createServer(function (req, res) {
     const q4_ans = q4.q4();
     const q5_ans = q5.q5();
     const q6_ans = q6.q6();
-    const q7_ans = q7.q7();
+    const q7_ans = q7.q7(readTxtFile("./triangle.txt"));
     res.write("Question 1 answer: " + q1_ans + "</br>");
     res.write("Question 2 answer: " + q2_ans + "</br>");
     res.write("Question 3 answer: " + q3_ans + "</br>");
@@ -27,3 +27,26 @@ http.createServer(function (req, res) {
     res.write("Question 7 answer: " + q7_ans + "</br>");
     res.end();
 }).listen(8080);
+
+function readTxtFile(path) {
+    let triangle = [];
+    let fs = require("fs");
+    let text = fs.readFileSync(path).toString('utf-8');
+    let textByLine = text.split("\n");
+    for (let i = 0; i < textByLine.length; i++) {
+        let to_Add = true;
+        let line = textByLine[i].split(" ");
+        for (let j = 0; j < line.length; j++) {
+            if (!isNaN(parseInt(line[j]))) {
+                line[j] = parseInt(line[j]);
+            } else {
+                // Eliminate trailing empty line in TXT file.
+                to_Add = false;
+            }
+        }
+        if (to_Add) {
+            triangle.push(line);
+        }
+    }
+    return triangle;
+}

@@ -12,13 +12,8 @@
  *
  * @return {number}
  */
-exports.q7 = function () {
-    let triangle = [
-        [3],
-        [7, 4],
-        [2, 4, 6],
-        [8, 5, 9, 3]
-    ];
+exports.q7 = function (triangle) {
+    // TODO: Speed up implementation, it's currently running 2^(99) iterations of a for-loop, try going downwards row-by-row keeping record of the greatest total so far.
     let largest_total = 0;
     let exponent = triangle.length - 1;
     for (let i = 0; i < Math.pow(2, exponent); i++) {

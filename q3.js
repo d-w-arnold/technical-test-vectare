@@ -7,7 +7,7 @@
  */
 exports.q3 = function () {
     let largest_palindrome = 0;
-    for (let i = 999; i >= 100 ; i--) {
+    for (let i = 999; i >= 100; i--) {
         for (let j = 999; j >= 100; j--) {
             let tmp = i * j;
             if (isPalindrome(tmp) && (tmp > largest_palindrome)) {
