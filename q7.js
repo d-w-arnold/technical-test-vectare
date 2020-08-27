@@ -13,32 +13,17 @@
  * @return {number}
  */
 exports.q7 = function (triangle) {
-    // TODO: Speed up implementation, it's currently running 2^(99) iterations of a for-loop, try going downwards row-by-row keeping record of the greatest total so far.
-    let largest_total = 0;
-    let exponent = triangle.length - 1;
-    for (let i = 0; i < Math.pow(2, exponent); i++) {
-        let path = i.toString(2);
-        let path_len = path.length;
-        for (let j = 0; j < (exponent - path_len); j++) {
-            path = '0' + path;
-        }
-        let x = 0;
-        let y = 0;
-        let tmp_total = triangle[x][y];
-        for (let j = 0; j < path.length; j++) {
-            let c = path.charAt(j);
-            if (c === '0') {
-                x++;
-                tmp_total += triangle[x][y];
-            } else if (c === '1') {
-                x++;
-                y++;
-                tmp_total += triangle[x][y];
+    for (let i = (triangle.length - 1); i > 0; i--) {
+        for (let j = 0; j < (triangle[i].length - 1); j++) {
+            let tmp_a = triangle[i][j];
+            let tmp_b = triangle[i][j + 1];
+            if (tmp_a > tmp_b) {
+                triangle[i - 1][j] += tmp_a;
+            } else {
+                triangle[i - 1][j] += tmp_b;
             }
         }
-        if (tmp_total > largest_total) {
-            largest_total = tmp_total;
-        }
+        triangle.pop();
     }
-    return largest_total;
+    return triangle[0][0];
 };
